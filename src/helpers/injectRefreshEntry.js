@@ -43,11 +43,11 @@ function injectRefreshEntry(originalEntry, options) {
 
   // Single string entry point
   if (typeof originalEntry === 'string') {
-    return [...prependEntries, originalEntry, ...appendEntries];
+    return [...prependEntries, ...appendEntries, originalEntry];
   }
   // Single array entry point
   if (Array.isArray(originalEntry)) {
-    return [...prependEntries, ...originalEntry, ...appendEntries];
+    return [...prependEntries, ...appendEntries, ...originalEntry];
   }
   // Multiple entry points
   if (typeof originalEntry === 'object') {
