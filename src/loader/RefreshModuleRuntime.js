@@ -22,7 +22,7 @@ module.exports = function () {
         !module.hot.data.module ||
         $RefreshUtils$.shouldInvalidateReactRefreshBoundary(module.hot.data.module, module)
       ) {
-        window.location.reload();
+        global.location.reload();
       }
       $RefreshUtils$.enqueueUpdate();
     }

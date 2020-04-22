@@ -48,7 +48,7 @@ function createRejectionHandler(callback) {
 }
 
 /**
- * Creates a handler that registers an EventListener on window for a valid type
+ * Creates a handler that registers an EventListener on global for a valid type
  * and calls a callback when the event fires.
  * @param {string} eventType A valid DOM event type.
  * @param {function(EventCallback): EventHandler} createHandler A function that creates an event handler.
@@ -68,7 +68,7 @@ function createWindowEventHandler(eventType, createHandler) {
     if (eventHandler === null) {
       return;
     }
-    window.removeEventListener(eventType, eventHandler);
+    global.removeEventListener(eventType, eventHandler);
     eventHandler = null;
   }
 
@@ -82,7 +82,7 @@ function createWindowEventHandler(eventType, createHandler) {
       return;
     }
     eventHandler = createHandler(callback);
-    window.addEventListener(eventType, eventHandler);
+    global.addEventListener(eventType, eventHandler);
 
     return unregister;
   }

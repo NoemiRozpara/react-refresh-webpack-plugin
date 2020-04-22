@@ -18,7 +18,7 @@ const singletonKey = '__webpack_hot_middleware_reporter__';
  */
 // eslint-disable-next-line no-unused-vars
 function initWHMEventSource(messageHandler, overrides) {
-  const client = window[singletonKey] || require('webpack-hot-middleware/client');
+  const client = global[singletonKey] || require('webpack-hot-middleware/client');
 
   client.useCustomOverlay({
     showProblems(type, data) {

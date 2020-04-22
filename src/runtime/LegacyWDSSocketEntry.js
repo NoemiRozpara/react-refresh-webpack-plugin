@@ -27,4 +27,4 @@ SockJSClient.prototype.onMessage = function onMessage(fn) {
   };
 };
 
-window.__webpack_dev_server_client__ = SockJSClient;
+global.__webpack_dev_server_client__ = SockJSClient;

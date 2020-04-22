@@ -1,12 +1,12 @@
-if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
+if (process.env.NODE_ENV !== 'production' && typeof global !== 'undefined') {
   const Refresh = require('react-refresh/runtime');
 
   // Inject refresh runtime into global
-  Refresh.injectIntoGlobalHook(window);
+  Refresh.injectIntoGlobalHook(global);
 
   // Setup placeholder functions
-  window.$RefreshReg$ = function () {};
-  window.$RefreshSig$ = function () {
+  global.$RefreshReg$ = function () {};
+  global.$RefreshSig$ = function () {
     return function (type) {
       return type;
     };
@@ -17,10 +17,10 @@ if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
    * @param {number} moduleId An ID of a module.
    * @returns {function(): void} A function to restore handlers to their previous state.
    */
-  window.$RefreshSetup$ = function setupModuleRefresh(moduleId) {
+  global.$RefreshSetup$ = function setupModuleRefresh(moduleId) {
     // Capture previous refresh state
-    const prevRefreshReg = window.$RefreshReg$;
-    const prevRefreshSig = window.$RefreshSig$;
+    const prevRefreshReg = global.$RefreshReg$;
+    const prevRefreshSig = global.$RefreshSig$;
 
     /**
      * Registers a refresh to react-refresh.
@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
      * @param {number} [id] An ID of a module.
      * @returns {void}
      */
-    window.$RefreshReg$ = function (type, id) {
+    global.$RefreshReg$ = function (type, id) {
       const typeId = moduleId + ' ' + id;
       Refresh.register(type, typeId);
     };
@@ -37,12 +37,12 @@ if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
      * Creates a module signature function from react-refresh.
      * @returns {function(string): string} A created signature function.
      */
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+    global.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
 
     // Restore to previous refresh functions after initialization
     return function cleanup() {
-      window.$RefreshReg$ = prevRefreshReg;
-      window.$RefreshSig$ = prevRefreshSig;
+      global.$RefreshReg$ = prevRefreshReg;
+      global.$RefreshSig$ = prevRefreshSig;
     };
   };
 }

@@ -16,9 +16,9 @@ function initWDSSocket(messageHandler, overrides) {
     // Ref: https://github.com/webpack/webpack-dev-server/pull/2055
     const connection = new SocketClient(
       url.format({
-        protocol: window.location.protocol,
-        hostname: overrides.sockHost || window.location.hostname,
-        port: overrides.sockPort || window.location.port,
+        protocol: global.location.protocol,
+        hostname: overrides.sockHost || global.location.hostname,
+        port: overrides.sockPort || global.location.port,
         pathname: overrides.sockPath || '/sockjs-node',
       })
     );
